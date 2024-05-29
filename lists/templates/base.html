@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do lists</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://pic.imgdb.cn/item/6656dad8d9c307b7e9f96988.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 90vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .jumbotron {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .form-control {
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        table thead {
+            background-color: #f2f2f2;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        input[type="submit"] {
+            background-color: #39C5BB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2a9189;
+            transition:0.5s ease-in-out;
+        }
+        .buttonClass{
+            background-color:#39C5BB;
+            text-align:center;
+            display:block;
+            margin:20px auto;
+        }
+
+        .input-box {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* 当输入框获得焦点时的样式 */
+        .input-box:focus {
+        border-color: #66afe9;
+        box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        outline: none;
+        }
+
+        /  * 鼠标悬停在输入框上的样式 */
+        .input-box:hover {
+        border-color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{% block header_text %}{% endblock %}</h1>
+        </div>
+        <div class="jumbotron">
+            <form method="POST" action="{% block form_action %}{% endblock %}">
+                <input name="item_text" id="id_new_item"
+                    class="input-box"
+                    placeholder="Enter a to-do item" />
+                {% csrf_token %}
+                <input type="submit" value="Add Item" class="btn btn-lg btn-block buttonClass">
+            </form>
+            <div>
+                {% block table %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
